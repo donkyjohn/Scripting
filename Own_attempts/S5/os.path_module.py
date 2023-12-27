@@ -26,3 +26,15 @@ print(var7) # if there is a directory in path return True, else False
 
 var8 = os.path.getsize(path)
 print(var8) # return size of file in bytes
+
+# os.stat(path) to get status of file or directory
+statinfo = os.stat('somefile.txt')
+
+# to get size of file in bytes
+size = os.statinfo.st_size  # in bytes
+
+# file type and permission
+mode = os.statinfo.st_mode
+
+# time most recent content modification
+mtime = os.statinfo.st_mtime
