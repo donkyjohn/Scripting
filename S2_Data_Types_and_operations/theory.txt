@@ -1,0 +1,56 @@
+List
+
+    A list is an ordered collection of elements. Elements can be of any data type, and they can be accessed by their index.
+    Lists are defined using square brackets [].
+    Lists allow duplicate elements, and you can modify the elements by their index.
+
+        The index of all list items can be found using the following lines of code:
+
+                my_list = ['a', 'b', 'c', 'd']
+                for index, value in enumerate(my_list):
+                print(f"Index: {index}, Value: {value}")
+
+        The index of one list item can be found using the following lines of code:
+
+                my_list = ['a', 'b', 'c', 'd']
+                value_to_find = 'c'
+                index = my_list.index(value_to_find)
+                print(f"Index of '{value_to_find}': {index}")
+
+        The range() function can be used together with the length of the list to iterate over the indices and access elements accordingly:
+
+                my_list = ['a', 'b', 'c', 'd']
+                for index in range(len(my_list)):
+                print(f"Index: {index}, Value: {my_list[index]}")
+
+Set
+
+    A set is an unordered collection of unique elements which does not allow duplicate values.
+    Sets are defined using curly brackets {} or the set() constructor.
+    Sets do not have indices and you cannot access elements by index because they are unordered.
+
+    example: my_set = {1, 2, 3, 'a', 'b', 'c', 'd'}
+
+Dictionary
+
+    A dictionary is an unordered collection of key-value pairs. Each key must be unique, and it is associated with a corresponding value.
+    Dictionaries are defined by using curly brackets. Each key-value pair is separated by a colon.
+    Dictionaries are usefull for mapping relationships between different pieces of data.
+
+    example: my_dict = {'a': 1, 'b': 2, 'c': 3}
+
+
+if/elif/else statement:
+
+    if "python" in text:
+        print(text)
+
+While/else statement:
+
+    while X > Y:
+        print(X is larger than Y)
+
+for/else statement
+
+    for x in mylist:    
+        print(x)

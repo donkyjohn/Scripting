@@ -1,0 +1,23 @@
+Comprehensions:
+
+Comprehensions are concise and expressive ways to create lists, dictionaries and sets. They provide a more readable and compact syntax for
+creating these data structures compared to traditional for loops. 
+
+List Comprehensions
+
+    [expression for item in iterable if condition]
+    variable = [x**2 for x in range(10) if x % 2 == 0] #this will have the squares of even numbers from 0 to 9 as output.
+
+    expression is the value your want to include in the lists.
+    item is a variable that takes on each value from the 'iterable'.
+    condition is an expression that filters the items.
+
+Dictionary Comprehensions
+
+    {key_expression: value_expression for item in iterable if condition}
+    variable = {x: x**2 for x in range(10) if x % 2 == 0}
+
+Set Comprehensions
+
+    {expression for item in iterable if condition}
+    variable = {x**2 for x in range(10) if x %2 == 0}
