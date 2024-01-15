@@ -35,3 +35,5 @@ with open('/home/guest/_repos/Scripting/Own_attempts/S5/pers.csv', mode='w') as 
     pers_writer.writerow(['Arya Stark', '1,55', '21'])
     pers_writer.writerow(['Daenerys Targaryen', '1,57', '32'])
 pers_file.close()
+
+
