@@ -13,7 +13,7 @@ print("\nLocal current time:\n{}".format(timetuple))
 print("Year: {}".format(timetuple.tm_year))
 print("Hour: {}".format(timetuple.tm_hour))
 # Hour & min
-hourmin = str(timetuple.tm_hour) + "h" + str(timetuple.tm_min)
+hourmin = str(timetuple.tm_hour) + "h" + str(timetuple.tm_min) + "min" 
 print("Hour & min: {}".format(hourmin))
 # Formatted time
 time_string = time.strftime("%d/%m/%Y, %H:%M:%S", timetuple)

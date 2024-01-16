@@ -1,51 +1,42 @@
-#!/bin/python3
-import itertools as it
+#!/usr/bin/python3
 
-def evens():
-    n = 0
-    while True:
-        yield n 
-        n += 10
-evens = evens()
-evenlist =  list(next(evens) for _ in range(10))
-print(evenlist)
+import sqlite3 as sq
+var = sq.connect('taxonomy.db')
+c = var.cursor()
 
+try:
+    c.execute('''CREATE TABLE ORGANISMS \
+              (org_id, latin_name, common_name, tax_id, kingdom, phylum, ordr)''')
+except sq.OperationalError:
+    print("\nTable organisms already exists\n")
 
-counter = it.count(start=0, step=2)
-evenlist2 = list(next(counter) for _ in range(10))
-print(evenlist2)
+c.execute("INSERT INTO organisms \
+          VALUES (1,'Homo sapiens','human', \
+          9606,'Metazoa','Chordata','Primates')")
+c.execute("INSERT INTO organisms \
+           VALUES (2,'Danio rerio','zebrafish', \
+           7955,'Metazoa','Chordata','Cypriniformes')")
+c.execute("INSERT INTO organisms \
+           VALUES (3,'Monosiga brevicollis','choanoflagellate', \
+           81824,'','','Choanoflagellida')")
+c.execute('''INSERT INTO organisms \
+             VALUES(?,?,?,?,?,?,?)''', \
+            (4,'Gallus gallus','chicken', 9031,'Metazoa','Chordata','Galliformes'))
 
-for i in it.count(start=0, step=-1):
-    if i < -3:
-        break
-    print(i)
+insert_id = c.lastrowid
+print('last row insert id {}'.format(insert_id))
+species = [(5,'Anopheles gambiae','malaria mosquito', 7165,'Metazoa','Arthropoda','Diptera'),
+           (6,'Tribolium castaneum','red flour beetle', 7070,'Metazoa','Arthropoda','Coleoptera')
+          ]
+c.executemany('INSERT INTO organisms VALUES (?,?,?,?,?,?,?)', species)
 
-c = 1
-for i in it.cycle([10,-10]):
-    if c > 5:
-        break
-    print(c,i)
-    c+=1
+# Update record
+c.execute('''UPDATE organisms SET common_name = ? WHERE tax_id = ? ''', \
+         ('African malaria mosquito', 7165))
+################################################################################
+# Save (commit) changes
+conn.commit()
+# Close connection when done with it
+conn.close()
 
-list1 = list(it.accumulate(range(10)))
-print(list1)
-
-import operator
-list3 = list(it.accumulate(range(1, 5), operator.sub))
-print(list3)
-
-families = [('cadherin', 'CDH1'), ('caspase', 'CASP3'),
-            ('caspase', 'CASP7'), ('cadherin', 'CDHR1'),
-            ('caspase', 'CASP9'), ('cadherin', 'CDH15')]
-
-print(families)
-sort = sorted(families)
-print("\n", sort)
-
-for k, v in it.groupby(sort, lambda make: make[0]):
-    print(k, v)
-    for family, gene in v:
-        print('{gene} from {family} gene family'.format(gene=gene,family=family))
-
-
-
+ 
