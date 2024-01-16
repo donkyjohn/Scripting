@@ -31,7 +31,7 @@ total_sum = 0
 number = int(input("Integer? "))
 while number != 0:
     total_sum += number
-    if total_sum >= 21:
+    if total_sum > 21:
         print("LOSE --> {} >= 21".format(total_sum))
         break
     number = int(input("Next integer? "))
