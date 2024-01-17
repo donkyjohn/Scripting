@@ -5,7 +5,7 @@
 from eutils import Client
 # Initialize client that handles all caching and query
 # Using API key from NCBI account settings e.g. 
-eclient = Client(api_key="84c4d9fa268d5e41511ce024a0cf00537808")
+eclient = Client(api_key="523a9e67ef40e67936ed01af675ab2bbac09")
 print("\nUsing NCBI E-utilities in Python\n")
 ################################################################################
 # ESEARCH: search for e.g. genes, any valid NCBI query may be used
@@ -28,7 +28,11 @@ print("2nd gene Id: {}".format(gene_esearch.ids[1]))
 # EFETCH: get record using Id e.g. gene id 7157 for human TNF
 ################################################################################
 gene_efetch = eclient.efetch(db='gene', id=7157)
+obj_summary_list2 = dir(gene_efetch)
+
 print("\n\nResults of gene efetch:\n{}".format(gene_efetch))
+print("\ngene efetch obj list:\n{}".format(obj_summary_list2))
+
 # One may fetch multiple genes at a time
 # These are returned as an EntrezgeneSet
 # Get first (and only) child which returns instance of Entrezgene class
