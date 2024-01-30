@@ -3,10 +3,23 @@
 # fibonacci.py
 
 x, y = 0, 1
-while x < 50:
+count = 0
+while x < 100000000000000000000:
     r = x + y
-    if r > 50:
+    if r > 100000000000000000000:
         break
-    print(r)
+    count += 1
+    if count == 50:
+        num1 = r
+    elif count == 51:
+        num2 = r
+        break
     x = y
     y = r
+
+result = num2 / num1
+print(num1)
+print(num2)
+print(result)
+
+
