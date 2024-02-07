@@ -8,7 +8,7 @@ class ShapeGenerator:
         self.root = root
         self.root.title("Shape Generator")
 
-        self.canvas = tk.Canvas(self.root, width=500, height=500, bg="#0066CC")  # Set background color to 0066CC
+        self.canvas = tk.Canvas(self.root, width=250, height=250, bg="#0066CC")  # Set background color to 0066CC
         self.canvas.pack(side=tk.TOP)
 
         self.shapes_count_label = tk.Label(root, text="0", font=("Helvetica", 60))

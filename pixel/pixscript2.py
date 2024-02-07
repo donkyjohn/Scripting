@@ -16,7 +16,7 @@ class ShapeGenerator:
         self.top_frame = tk.Frame(self.root)
         self.top_frame.pack()
 
-        self.canvas = tk.Canvas(self.top_frame, width=500, height=500, bg="#0066CC")  # Set background color to 0066CC
+        self.canvas = tk.Canvas(self.top_frame, width=250, height=250, bg="#0066CC")  # Set background color to 0066CC
         self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         self.shapes_count_label = tk.Label(self.top_frame, text="0", font=("Helvetica", 20))
