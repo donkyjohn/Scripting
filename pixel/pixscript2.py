@@ -1,3 +1,6 @@
+#this code doesn't work properly
+
+
 import tkinter as tk
 import random
 from tkinter.colorchooser import askcolor
@@ -7,69 +10,82 @@ class ShapeGenerator:
     def __init__(self, root):
         self.root = root
         self.root.title("Shape Generator")
+        self.root.geometry("400x600")  # Set window width and height
 
-        self.canvas = tk.Canvas(self.root, width=250, height=250, bg="#0066CC")  # Set background color to 0066CC
-        self.canvas.pack(side=tk.TOP)
+        # Create a frame for canvas and labels
+        self.top_frame = tk.Frame(self.root)
+        self.top_frame.pack()
 
-        self.shapes_count_label = tk.Label(root, text="0", font=("Helvetica", 60))
+        self.canvas = tk.Canvas(self.top_frame, width=500, height=500, bg="#0066CC")  # Set background color to 0066CC
+        self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        self.shapes_count_label = tk.Label(self.top_frame, text="0", font=("Helvetica", 20))
         self.shapes_count_label.pack()
 
-        shape_label_1 = tk.Label(root, text="Shape / Color 1:")
+        # Create a frame for shape and color dropdowns
+        self.middle_frame = tk.Frame(self.root)
+        self.middle_frame.pack()
+
+        shape_label_1 = tk.Label(self.middle_frame, text="Shape / Color 1:")
         shape_label_1.pack()
 
         self.shape_var_1 = tk.StringVar(value="Square")  # Set default shape to Square
         shapes = ["Circle", "Square", "Triangle", "Diamond", "Hexagon", "Trapezoid"]
-        shape_dropdown_1 = tk.OptionMenu(root, self.shape_var_1, *shapes)
+        shape_dropdown_1 = tk.OptionMenu(self.middle_frame, self.shape_var_1, *shapes)
         shape_dropdown_1.pack()
 
         self.color_var_1 = tk.StringVar(value="Blue")  # Set default color to Blue
         colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Cyan"]
-        color_dropdown_1 = tk.OptionMenu(root, self.color_var_1, *colors)
+        color_dropdown_1 = tk.OptionMenu(self.middle_frame, self.color_var_1, *colors)
         color_dropdown_1.pack()
 
-        shape_label_2 = tk.Label(root, text="Shape / Color 2:")
+        shape_label_2 = tk.Label(self.middle_frame, text="Shape / Color 2:")
         shape_label_2.pack()
 
         self.shape_var_2 = tk.StringVar(value="Circle")  # Set default shape to Circle
-        shape_dropdown_2 = tk.OptionMenu(root, self.shape_var_2, *shapes)
+        shape_dropdown_2 = tk.OptionMenu(self.middle_frame, self.shape_var_2, *shapes)
         shape_dropdown_2.pack()
 
         self.color_var_2 = tk.StringVar(value="Yellow")  # Set default color to Yellow
-        color_dropdown_2 = tk.OptionMenu(root, self.color_var_2, *colors)
+        color_dropdown_2 = tk.OptionMenu(self.middle_frame, self.color_var_2, *colors)
         color_dropdown_2.pack()
 
-        self.num_shapes_var = tk.IntVar(value=10)  # Set default number of objects to 10
-        num_shapes_slider_label = tk.Label(root, text="Number of Shapes:")
+        # Create a frame for sliders and buttons
+        self.bottom_frame = tk.Frame(self.root)
+        self.bottom_frame.pack()
+
+        self.num_shapes_var = tk.IntVar(value=10)
+        num_shapes_slider_label = tk.Label(self.bottom_frame, text="Number of Shapes:")
         num_shapes_slider_label.pack()
-        num_shapes_slider = tk.Scale(root, from_=1, to=25, orient=tk.HORIZONTAL, variable=self.num_shapes_var)  # Set max to 25
+        num_shapes_slider = tk.Scale(self.bottom_frame, from_=1, to=25, orient=tk.HORIZONTAL, variable=self.num_shapes_var)  # Set max to 25
         num_shapes_slider.pack()
 
         self.lock_num_var = tk.BooleanVar(value=False)
-        lock_num_checkbox = tk.Checkbutton(root, text="Lock Number", variable=self.lock_num_var, command=self.toggle_lock_number)
+        lock_num_checkbox = tk.Checkbutton(self.bottom_frame, text="Lock Number", variable=self.lock_num_var, command=self.toggle_lock_number)
         lock_num_checkbox.pack()
 
         self.allow_overlap_var = tk.BooleanVar(value=False)
-        allow_overlap_button = tk.Checkbutton(root, text="Allow Overlap", variable=self.allow_overlap_var)
+        allow_overlap_button = tk.Checkbutton(self.bottom_frame, text="Allow Overlap", variable=self.allow_overlap_var)
         allow_overlap_button.pack()
 
         self.auto_gen_var = tk.BooleanVar(value=True)
-        auto_gen_checkbox = tk.Checkbutton(root, text="Auto-Generate", variable=self.auto_gen_var, command=self.toggle_auto_generation)
+        auto_gen_checkbox = tk.Checkbutton(self.bottom_frame, text="Auto-Generate", variable=self.auto_gen_var, command=self.toggle_auto_generation)
         auto_gen_checkbox.pack()
 
-        delay_label = tk.Label(root, text="Delay (seconds):")
+        delay_label = tk.Label(self.bottom_frame, text="Delay (seconds):")
         delay_label.pack()
 
         self.delay_var = tk.DoubleVar(value=2.5)  # Set default delay to 2.5 seconds
-        delay_slider = tk.Scale(root, from_=1, to=10, resolution=0.1, orient=tk.HORIZONTAL, variable=self.delay_var)
+        delay_slider = tk.Scale(self.bottom_frame, from_=1, to=10, resolution=0.1, orient=tk.HORIZONTAL, variable=self.delay_var)
         delay_slider.pack()
 
-        next_button = tk.Button(root, text="Next", command=self.generate_shapes)
+        next_button = tk.Button(self.bottom_frame, text="Next", command=self.generate_shapes)
         next_button.pack()
 
-        self.start_stop_button = tk.Button(root, text="Start", command=self.toggle_auto_generation)
+        self.start_stop_button = tk.Button(self.bottom_frame, text="Start", command=self.toggle_auto_generation)
         self.start_stop_button.pack()
 
-        background_color_button = tk.Button(root, text="Change Background Color", command=self.change_background_color)
+        background_color_button = tk.Button(self.bottom_frame, text="Change Background Color", command=self.change_background_color)
         background_color_button.pack()
 
         self.next_shape_event = None
@@ -78,8 +94,6 @@ class ShapeGenerator:
         self.root.bind("<space>", lambda event: self.generate_shapes())
         self.root.bind("<Return>", lambda event: self.toggle_auto_generation())
         self.root.bind("<Right>", lambda event: self.navigate_forward())
-
-        self.generate_shapes()  # Initial generation
 
     def toggle_auto_generation(self):
         self.auto_gen_var.set(not self.auto_gen_var.get())
@@ -226,4 +240,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ShapeGenerator(root)
     root.mainloop()
-
